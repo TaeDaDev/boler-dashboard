@@ -4,8 +4,15 @@
 - [x] Setup file structure
 - [x] Create the build of the site and style it 
 - [x] Add Javascript for the interactivity 
-      
-BEGIN
+
+
+## Imperial/Metric Converter
+
+The Imperial/Metric Converter is a tool that allows users to convert measurements between Imperial and Metric units. The application converts inches, feet, yards, and miles to centimeters, meters, and kilometers, as well as Metric units back to Imperial units.
+
+### Logic and Pseudocode
+
+[BEGIN
 
 
 INPUT numericValue
@@ -48,3 +55,4 @@ ELSE
 
 
 END
+]
