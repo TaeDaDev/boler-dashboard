@@ -12,7 +12,7 @@ The Imperial/Metric Converter is a tool that allows users to convert measurement
 
 ### Logic and Pseudocode
 
-[BEGIN
+BEGIN
 
 
 INPUT numericValue
@@ -55,4 +55,4 @@ ELSE
 
 
 END
-]
+
