@@ -23,7 +23,10 @@ function displayAnswer() {
 }
 
 // Event listener for the Magic Eight Ball
-document.getElementById("ball").addEventListener("mousedown", function() {
+document.getElementById("ball").addEventListener("click", function(event) {
+
+    // Prevent the form from refreshing the page
+    event.preventDefault();
 
     // Check if the user entered a question
     if (document.getElementById("question").value === "") {
@@ -36,22 +39,34 @@ document.getElementById("ball").addEventListener("mousedown", function() {
 });
 
 // Event listener for the reset button
-document.getElementById("reset").addEventListener("click", function() {
+document.getElementById("reset").addEventListener("click", function(event) {
+
+    // Prevent the form from refreshing the page
+    event.preventDefault();
 
     // Hide the answer circle
     document.getElementById("circle").style.display = "none";
+
+    // Clear the question
+    document.getElementById("question").value = "";
 });
 
 // Bonus: Add a new response
-document.getElementById("addAnswer").addEventListener("click", function() {
+document.getElementById("addAnswer").addEventListener("click", function(event) {
+
+    // Prevent the form from refreshing the page
+    event.preventDefault();
 
     // Ask the user for a new response
     let newAnswer = prompt("Enter a new Magic Eight Ball response:");
 
-    // Add the new response to the array
-    answers.push(newAnswer);
+    // Only add the answer if the user entered something
+    if (newAnswer !== null && newAnswer !== "") {
+        answers.push(newAnswer);
 
-    // Display the new response and number of responses in the console
-    console.log("New response: " + newAnswer);
-    console.log("Number of responses: " + answers.length);
+        // Display the new response and number of responses in the console
+        console.log("New response: " + newAnswer);
+        console.log("Number of responses: " + answers.length);
+    }
 });
+
