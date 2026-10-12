@@ -21,7 +21,7 @@
     <!-- JavaScript -->
     <script defer src="js/weeklyGoal.js"></script>
     <script defer src="js/metric-converter.js"></script>
-    <script defer src="M6-AssignmentFiles/js/magic-eight-ball.js"></script>
+    <script defer src="js/magic-eight-ball.js"></script>
 
     <!-- Bootstrap JavaScript -->
     <script
@@ -51,9 +51,10 @@
     </noscript>
 
     <div class="container">
+      <div class="row"></div>
       <!-- Weekly Goal Calculator -->
-      <div class="row">
-        <div class="col" id="weekly-goal">
+      
+        <div class="col-md-4" id="weekly-goal">
           <h2>Weekly Goal Calculator</h2>
 
           <form>
@@ -80,8 +81,7 @@
       </div>
 
       <!-- Metric Converter -->
-      <div class="row">
-        <div class="col" id="metric-converter">
+        <div class="col-md-4" id="metric-converter">
           <h2>Imperial/Metric Converter</h2>
 
           <form>
@@ -117,8 +117,7 @@
       </div>
 
       <!-- Magic Eight Ball -->
-      <div class="row">
-        <div class="col" id="magic-eight-ball">
+        <div class="col-md-4" id="magic-eight-ball">
           <h2 class="heading">Magic Eight Ball</h2>
 
           <form>
@@ -134,7 +133,7 @@
 
               <img
                 id="ball"
-                src="M6-AssignmentFiles/img/magic-eight-ball.png"
+                src="img\magic-eight-ball.png"
                 alt="Magic Eight Ball"
               />
             </div>
