@@ -10,19 +10,9 @@
 
     <script>
       // Weekly Goal: Calculate the total weekly task goal for a user.
-      function weeklyGoal(username, dailyGoal, bonusTasks) {
-        // Calculate weekly goal based on number of workdays (5) per week
-        let weeklyGoal = dailyGoal * 5;
-
-        // Add bonusTasks to weeklyGoal.
-        let totalGoal = weeklyGoal + bonusTasks;
-
-        // Output results to web page
-        document.getElementById("goal-message").innerHTML = output;
-      }
 
       // Declare variables and values
-      let userName = "Asante Boler ";
+      let userName = "Jane Doe";
       let dailyGoal = 5;
       // FIXED: Changed bonusTasks from string to number for correct arithmetic operation.
       let bonusTasks = 2;
@@ -44,16 +34,6 @@
       document.write("User: " + userName + "<br>");
       // FIXED: Corrected quotation marks to not include variable.
       document.write("Total Weekly Goal: " + totalGoal);
-
-      // Add EventListener to btn, get form values and call weeklyGoal function
-      const btn = document.getElementById("goal-btn");
-      btn.addEventListener("click", function () {
-        event.preventDefault(); // Prevent form submission
-        let userName = document.getElementById("userName").value;
-        let dailyGoal = parseInt(document.getElementById("dailyGoal").value);
-        let bonusTasks = parseInt(document.getElementById("bonusTasks").value);
-        weeklyGoal(userName, dailyGoal, bonusTasks);
-      });
     </script>
   </body>
 </html>

@@ -19,6 +19,7 @@
     />
 
     <!-- JavaScript -->
+    <script defer src="js/weeklyGoal.js"></script>
     <script defer src="js/metric-converter.js"></script>
     <script defer src="M6-AssignmentFiles/js/magic-eight-ball.js"></script>
 
@@ -50,6 +51,34 @@
     </noscript>
 
     <div class="container">
+      <!-- Weekly Goal Calculator -->
+      <div class="row">
+        <div class="col" id="weekly-goal">
+          <h2>Weekly Goal Calculator</h2>
+
+          <form>
+            <label for="userName">User Name:</label>
+            <input type="text" id="userName" required />
+
+            <br /><br />
+
+            <label for="dailyGoal">Daily Goal:</label>
+            <input type="number" id="dailyGoal" min="0" required />
+
+            <br /><br />
+
+            <label for="bonusTasks">Bonus Tasks:</label>
+            <input type="number" id="bonusTasks" min="0" required />
+
+            <br /><br />
+
+            <button type="submit" id="goal-btn">Calculate Weekly Goal</button>
+          </form>
+
+          <div id="goal-message"></div>
+        </div>
+      </div>
+
       <!-- Metric Converter -->
       <div class="row">
         <div class="col" id="metric-converter">
