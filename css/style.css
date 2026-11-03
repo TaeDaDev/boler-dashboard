@@ -1,26 +1,58 @@
 body {
-    background-color: #f4f4f4;
-    font-family: Arial, Helvetica, sans-serif;
-}
-#metric-converter {
-    padding: 20px;
-    margin-top: 20px;
+  background-color: #f4f4f4;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-#metric-converter form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 400px;
+/* Align dashboard sections */
+#weekly-goal,
+#task-list,
+#metric-converter,
+#magic-eight-ball {
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
 }
 
-#metric-converter input,
-#metric-converter select,
-#metric-converter button {
-    padding: 8px;
+/* Align form elements */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
 }
 
+/* Style input fields, dropdowns, and buttons */
+input,
+select,
+button {
+  padding: 8px;
+}
+
+/* Display the task list */
+#user-tasks {
+  padding-left: 20px;
+}
+
+#user-tasks li {
+  margin: 10px 0;
+}
+
+/* Metric Converter */
 #conversion-result {
-    margin-top: 20px;
-    font-size: 18px;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+/* Keep dashboard sections aligned on smaller screens */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  #weekly-goal,
+  #task-list,
+  #metric-converter,
+  #magic-eight-ball {
+    padding: 10px;
+  }
 }

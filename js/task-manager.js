@@ -1,39 +1,181 @@
-
 let myTasks = [];
 
-// Create the unordered list
+// Get the HTML elements.
+let taskForm = document.getElementById("task-form");
+let taskNameInput = document.getElementById("task-name");
+let taskPriorityInput = document.getElementById("task-priority");
+let taskImportantInput = document.getElementById("task-important");
 let taskList = document.getElementById("task-list");
+let deleteAllButton = document.getElementById("delete-all-tasks");
+
+// Create the list that will display tasks.
 let userTasks = document.createElement("ul");
-
-// Give the list an ID
 userTasks.id = "user-tasks";
-
-// Add the list to the task-list div
 taskList.appendChild(userTasks);
 
-// Get the Add Task button
-let addTaskButton = document.getElementById("add-task");
+let nextTaskId = 1;
 
-// Add a click event listener
-addTaskButton.addEventListener("click", function () {
-    // Get the task name
-    let taskName = document.getElementById("task-name").value;
+// Display all tasks.
+function displayTasks() {
+  userTasks.innerHTML = "";
 
-    // Check that the input is not empty
-    if (taskName !== "") {
-        // Store the task in the array
-        myTasks.push(taskName);
+  myTasks.forEach(function (task) {
+    let listItem = document.createElement("li");
 
-        // Create a new list item
-        let listItem = document.createElement("li");
+    // Display the task name.
+    let taskText = document.createElement("span");
+    taskText.textContent = task.name;
+    listItem.appendChild(taskText);
 
-        // Add the task text to the list item
-        listItem.textContent = taskName;
+    // Display the priority.
+    let priorityText = document.createElement("span");
+    priorityText.textContent = " - " + task.priority;
+    listItem.appendChild(priorityText);
 
-        // Add the list item to the unordered list
-        userTasks.appendChild(listItem);
-
-        // Clear the input field
-        document.getElementById("task-name").value = "";
+    // Style tasks based on priority.
+    if (task.priority === "High") {
+      priorityText.style.color = "red";
+    } else if (task.priority === "Medium") {
+      priorityText.style.color = "orange";
+    } else {
+      priorityText.style.color = "green";
     }
-});
+
+    // Highlight important tasks in red.
+    if (task.isImportant) {
+      listItem.style.color = "red";
+    }
+
+    // Add a strikethrough to completed tasks.
+    if (task.isCompleted) {
+      taskText.style.textDecoration = "line-through";
+    }
+
+    // Add a checkbox to mark the task complete.
+    let completeCheckbox = document.createElement("input");
+    completeCheckbox.type = "checkbox";
+    completeCheckbox.checked = task.isCompleted;
+
+    completeCheckbox.addEventListener("change", function () {
+      task.isCompleted = completeCheckbox.checked;
+      displayTasks();
+      logTasks();
+    });
+
+    listItem.appendChild(completeCheckbox);
+    listItem.appendChild(document.createTextNode(" Completed "));
+
+    // Add a checkbox to change importance.
+    let importantCheckbox = document.createElement("input");
+    importantCheckbox.type = "checkbox";
+    importantCheckbox.checked = task.isImportant;
+
+    importantCheckbox.addEventListener("change", function () {
+      task.isImportant = importantCheckbox.checked;
+      displayTasks();
+      logTasks();
+    });
+
+    listItem.appendChild(importantCheckbox);
+    listItem.appendChild(document.createTextNode(" Important "));
+
+    // Add an Edit button.
+    let editButton = document.createElement("button");
+    editButton.type = "button";
+    editButton.textContent = "Edit";
+
+    editButton.addEventListener("click", function () {
+      let newName = prompt("Enter the new task name:", task.name);
+
+      if (newName !== null && newName.trim() !== "") {
+        task.name = newName.trim();
+
+        let newPriority = prompt("Enter High, Medium, or Low:", task.priority);
+
+        if (newPriority !== null) {
+          newPriority = newPriority.trim().toLowerCase();
+
+          if (
+            newPriority === "high" ||
+            newPriority === "medium" ||
+            newPriority === "low"
+          ) {
+            task.priority =
+              newPriority.charAt(0).toUpperCase() + newPriority.slice(1);
+          }
+        }
+
+        displayTasks();
+        logTasks();
+      }
+    });
+
+    listItem.appendChild(editButton);
+
+    // Add a Delete button.
+    let deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.textContent = "Delete";
+
+    deleteButton.addEventListener("click", function () {
+      myTasks = myTasks.filter(function (item) {
+        return item.id !== task.id;
+      });
+
+      displayTasks();
+      logTasks();
+    });
+
+    listItem.appendChild(deleteButton);
+
+    // Add the task to the webpage.
+    userTasks.appendChild(listItem);
+  });
+}
+
+// Log the task array as JSON.
+function logTasks() {
+  console.log(JSON.stringify(myTasks));
+}
+
+// Add a new task.
+function addTask(event) {
+  event.preventDefault();
+
+  let taskName = taskNameInput.value.trim();
+
+  if (taskName !== "") {
+    let task = {
+      id: nextTaskId,
+      name: taskName,
+      priority: taskPriorityInput.value,
+      isImportant: taskImportantInput.checked,
+      isCompleted: false,
+    };
+
+    nextTaskId++;
+    myTasks.push(task);
+
+    displayTasks();
+    logTasks();
+
+    taskForm.reset();
+    taskPriorityInput.value = "Medium";
+  }
+}
+
+// Connect the form to the addTask function.
+taskForm.addEventListener("submit", addTask);
+
+// Delete the entire task list.
+function deleteTaskList() {
+  myTasks = [];
+  displayTasks();
+  logTasks();
+}
+
+// Connect the button to the deleteTaskList function.
+deleteAllButton.addEventListener("click", deleteTaskList);
+
+// Display the initial task list.
+displayTasks();
